@@ -60,15 +60,6 @@ Next, we will obtain the private IP address of the Ubuntu virtual machine (linux
 
 ![Screenshot 2024-12-18 112830](https://github.com/user-attachments/assets/f8ae1624-2b81-46af-9a39-f9bf78912105)
 
-
-</p>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-</p>
-<br />
-
-<p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
 <p>
 
@@ -116,24 +107,82 @@ Re-enable IMCP traffic for the Newwork Security Group in the Linux virtual machi
 <br />
 
 <p>
-  
+
+![Screenshot 2024-12-18 115523](https://github.com/user-attachments/assets/095e3f37-398c-4adb-bb4d-30cc49ae56b2)
+
+![Screenshot 2024-12-18 115600](https://github.com/user-attachments/assets/82f0b7f6-40a2-4a22-8c9a-af6259004d43)
+
 </p>
 <p>
-  
+Next, we will observe SSH traffic only using Wireshark on Windows Virtual Machine. SSH is used to make a secure connection from one computer to another. We will use a Windows VM to create an SSH connection to the Linux VM and then observe the traffic. Type ssh in Wireshark to start a capture. Open Windows Powershell and type ssh labuser@<private IP address>. For example, you would type in the Powershell ssh labuser@10.0.0.5.  
 </p>
 <br />
 
 <p>
-  
+
+![Screenshot 2024-12-18 121247](https://github.com/user-attachments/assets/5b9bca0b-2200-4c43-9524-2ce00f19ca71)
+
+![Screenshot 2024-12-18 121323](https://github.com/user-attachments/assets/57f97f1c-9d1d-4a0c-afca-c4f61555423b)
+
 </p>
 <p>
-  
+You will observe the SSH traffic in Wireshark when you enter the command line. They will ask if you want to continue connecting. Type yes. Then, you will be prompted to enter the password for the Linux virtual machine you created earlier. The password will not show when you start typing it for security reasons. Once you are finished typing the password, hit enter. You will see more SSH traffic happening in Wireshark. At the end of the Powershell labuser@linux-vm:~$, you are now connected to a Linux VM using SSH.  
+</p>
+<br />
+<p>
+
+![Screenshot 2024-12-18 121427](https://github.com/user-attachments/assets/9f6b5d22-e632-4fe0-8297-a434fe5bc014)
+
+![Screenshot 2024-12-18 121323](https://github.com/user-attachments/assets/a226841f-f36c-4b15-99c6-68f382112a0c)
+
+![Screenshot 2024-12-18 121847](https://github.com/user-attachments/assets/67d85f9b-672e-4ae8-9fe8-f17218d59829)
+
+Anything that is typed will be encrypted, and it is scrambled.
+ 
+</p>
+<p>
+ 
+![Screenshot 2024-12-18 122023](https://github.com/user-attachments/assets/171167c1-fa78-4711-bf40-dd0bf1605663) 
+</p>
+<br />
+<p>
+To filter TCP traffic, type in Wireshark tcp.port == 22. Then, in Powershell, you type anything in the command line and observe the TCP traffic in Wireshark. Instead of typing SSH, you can type in tcp.port == 22 for the whole filter. To drop the connection to linux -vm, type in exit in Powershell.    
 </p>
 <br />
 <p>
   
+ ![Screenshot 2024-12-18 123322](https://github.com/user-attachments/assets/3d2c8a15-43ee-403b-b243-117f027eb444)
+ 
 </p>
+<br/>
 <p>
-  
+In Wireshark, we are going to filter for DHCP traffic only. Dynamic Host Configuration Protocol (DHCP) works on ports 67  and 68 to assign an IP address to devices when they are first connected to the network. In Wireshark, type in DHCP, then in Windows Powershell, type in ipconfig /renew. You will see that we capture DHCP traffic.  
 </p>
 <br />
+<p>
+
+![Screenshot 2024-12-18 124349](https://github.com/user-attachments/assets/4d773e3e-e998-49ba-9b09-b89bc1d41271)
+
+![Screenshot 2024-12-18 124425](https://github.com/user-attachments/assets/a4bd673f-db4b-46b8-b8e1-a9c10a4b7c07)
+  
+</p>
+<p>
+Now, in Wireshark, we will filter for DNS traffic only. From the Windows 10 VM PowerShell, type nslookup disney.com, hit enter, and it will show us the Disney IP address. In Wireshark, a lot of spam happens in the back end.  
+</p>
+<br/>
+<p>
+
+![Screenshot 2024-12-18 130018](https://github.com/user-attachments/assets/26a3f171-d98a-49ef-8f42-c2123ff5043f)
+
+![Screenshot 2024-12-18 130345](https://github.com/user-attachments/assets/c2821864-fd70-43bf-8496-492df9485280)
+  
+</p>
+<p>
+The last traffic we will observe is RDP traffic. To access it, type in tcp port ==3389 in Wireshark. We observed nonstop spam traffic because the Remote Desktop Protocol shows a live stream constantly being transmitted from one computer to another.  
+</p>
+<br/>
+<p>
+
+ ![Screenshot 2024-12-18 131042](https://github.com/user-attachments/assets/ca256831-c7b9-4801-818f-f8ad65697440)
+ 
+</p>
